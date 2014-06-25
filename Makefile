@@ -6,12 +6,16 @@ CC = gcc
 CFLAGS = -c -g -Wall -Wextra
 LFLAGS = -g -Wall -Wextra
 
-PKG_MATH_LIBS = -lm
-PKG_CHECK_LIBS = `pkg-config --libs check`
+PKG_MATH_LIBS = -lm#
+#PKG_CHECK_LIBS = `pkg-config --libs check`
+PKG_CHECK_LIBS = -lcheck -lm
 
 .PHONY: all dep clean
 
 all: geometry_test
+
+test: geometry_test
+	./geometry_test
 
 geometry_test: geometry_test.o geometry.o
 	$(CC) $(LFLAGS) $^ $(PKG_CHECK_LIBS) $(PKG_MATH_LIBS) -o $@
